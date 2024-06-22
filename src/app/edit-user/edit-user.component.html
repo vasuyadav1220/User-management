@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Edit User</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+      <mat-error *ngIf="editForm.get('username')?.hasError('required')">Username is required</mat-error>
+      <mat-error *ngIf="editForm.get('username')?.hasError('minlength')">Username must be at least 2 characters long</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="editForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="editForm.get('email')?.hasError('email')">Enter a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="user">User</mat-option>
+      </mat-select>
+      <mat-error *ngIf="editForm.get('role')?.hasError('required')">Role is required</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [disabled]="!editForm.valid" (click)="onSave()">Save</button>
+</div>
